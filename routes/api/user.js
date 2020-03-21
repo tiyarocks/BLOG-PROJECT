@@ -1,10 +1,6 @@
 //end point where somebody send a post request to /api/users to create a new user
 const {Router}=require('express')
-const {
-    createUser,
-    authUser,
-    findUserByToken
-}=require('../../controllers/users')
+const {findUserByToken}=require('../../controllers/users')
 const route =Router()
 route.get('/',async(req,res)=>{
     let auth=req.headers['authorization']
@@ -15,14 +11,13 @@ route.get('/',async(req,res)=>{
     }
     //based on the token i can find the user
     else{
-        res.status(401).send(
-            "errors":{
+        res.status(401).send({
+            "errors" : {
                 "body": [
                   "Authorization token empty"
                 ]
               }
-
-        )
+        })
     }
 
 })
